@@ -114,10 +114,13 @@ const addDefaultUser = async () => {
                     phone: "49475821",
             }
         )
- 
+        
             await adminUser.save()
-            console.log("Default admin user added ")
+            console.log("User created by default")
         }
+
+
+
     } catch (e) {
         console.e("Error adding default user:", e)
     }
