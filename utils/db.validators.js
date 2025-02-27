@@ -1,7 +1,7 @@
 //Validar datos relacionados a la BD
 import { isValidObjectId } from 'mongoose';
 import User from '../src/user/user.model.js'
-import Category from '../src/category/category.model.js'
+
 
                                 //parámetro | token
 export const existUsername = async(username, user)=>{
@@ -47,9 +47,3 @@ export const findUser = async(id)=>{
     }
 }
 
-export const existCategoryName = async (name) => {
-    const category = await Category.findOne({ name })
-    if (category) {
-        throw new Error('Category name already exists')
-    }
-}
