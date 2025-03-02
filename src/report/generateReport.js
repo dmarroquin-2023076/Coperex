@@ -1,7 +1,6 @@
 import ExcelJS from 'exceljs';
 import Company from '../company/company.model.js';
 import path from 'path';
-import fs from 'fs'; 
 import { fileURLToPath } from 'url'; //Para obtener la url actual o el direccionamiento del path
 
 // Obtener el directorio actual 
