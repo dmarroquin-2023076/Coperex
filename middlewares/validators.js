@@ -1,7 +1,7 @@
 //Validar campos en las rutas
 import { body } from "express-validator"
 import { validateErrors, validateErrorsWithoutFiles } from "./validate.errors.js"
-import { existEmail, existUsername, notRequiredField } from "../utils/db.validators.js"
+import { checkCompanyNameExists, existEmail, existUsername, notRequiredField } from "../utils/db.validators.js"
 
 export const updateUserValidator = [
     body('username')
@@ -38,4 +38,30 @@ export const updatePasswordValidator = [
         .matches(/[A-Z]/).withMessage('New password must contain at least 1 uppercase letter')
         .matches(/\d/).withMessage('New password must contain at least 1 number'),
     validateErrors 
+]
+
+export const saveCompanyValidator = [
+    body('name')
+        .notEmpty().withMessage('Name is required.')
+        .custom(checkCompanyNameExists), // Use la validacion customizada
+    body('description')
+        .notEmpty().withMessage('Description is required.'),
+    body('phone')
+        .notEmpty().withMessage('Phone is required.')
+        .isLength({ min: 8, max: 15 }).withMessage('Phone number must be between 8 and 15 characters.'),
+    body('impactLevel')
+        .notEmpty().withMessage('Impact level is required.'),
+    body('yearsOfExperience')
+        .notEmpty().withMessage('Years of experience is required.')
+        .isNumeric().withMessage('Years of experience must be a number.'),
+    body('businessCategory')
+        .notEmpty().withMessage('Business category is required.'),
+    body('subsidiary')
+        .notEmpty().withMessage('Subsidiary type is required.'),
+    validateErrors
+]
+export const saveCompanyValidator2 = [
+    body('name')
+        .custom(checkCompanyNameExists), // Use la validacion customizada
+    validateErrors
 ]

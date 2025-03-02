@@ -1,6 +1,7 @@
 //Validar datos relacionados a la BD
 import { isValidObjectId } from 'mongoose';
 import User from '../src/user/user.model.js'
+import Company from '../src/company/company.model.js'
 
 
                                 //parámetro | token
@@ -45,5 +46,13 @@ export const findUser = async(id)=>{
         console.error(err)
         return false
     }
+}
+
+export const checkCompanyNameExists = async (name) => {
+    const existingCompany = await Company.findOne({ name })
+    if (existingCompany) {
+        throw new Error('Company name already exists.')
+    }
+    return true
 }
 
